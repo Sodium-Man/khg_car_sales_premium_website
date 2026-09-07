@@ -528,8 +528,8 @@ const vehicles = [
 {
   id: "2018-ford-endura-st-line-awd",
   title: "2018 Ford Endura ST-Line CA Auto AWD MY19",
-  price: 17000,
-  kms: "146,778 km",
+  price: 16720,
+  kms: "146,859 km",
   transmission: "Automatic",
   fuel: "Diesel",
   warranty: "12 month warranty included",
