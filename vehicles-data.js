@@ -335,7 +335,7 @@ const vehicles = [
 {
   id: "2017-land-rover-discovery-sport-sd4-hse",
   title: "2017 Land Rover Discovery Sport SD4 HSE Auto 4x4 MY18",
-  price: 17553,
+  price: 15999,
   kms: "93,780 km",
   transmission: "Automatic",
   fuel: "Diesel",
