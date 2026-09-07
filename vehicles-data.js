@@ -431,7 +431,7 @@ const vehicles = [
 {
   id: "2021-land-rover-discovery-sport-p200-r-dynamic-s",
   title: "2021 Land Rover Discovery Sport P200 R-Dynamic S Auto 4x4 MY21",
-  price: 27888,
+  price: 27140,
   kms: "106,147 km",
   transmission: "Automatic",
   fuel: "Petrol",
