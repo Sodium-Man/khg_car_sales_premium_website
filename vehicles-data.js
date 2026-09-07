@@ -2,7 +2,7 @@ const vehicles = [
 {
   id: "2015-bmw-x5-xdrive30d-black",
   title: "2015 BMW X5 xDrive30d F15 Auto 4x4",
-  price: 21888,
+  price: 20888,
   kms: "156,605 km",
   transmission: "Automatic",
   fuel: "Diesel",
