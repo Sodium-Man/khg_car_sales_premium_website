@@ -254,7 +254,7 @@ const vehicles = [
 {
   id: "2017-mercedes-benz-gla220d",
   title: "2017 Mercedes-Benz GLA-Class GLA220 d Auto",
-  price: 17500,
+  price: 17000,
   kms: "125,349 km",
   transmission: "Automatic",
   fuel: "Diesel",
