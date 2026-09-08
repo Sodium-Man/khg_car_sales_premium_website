@@ -63,7 +63,7 @@
     </div>
   </header>
 
-  <section class="page-title">
+  <section class="page-title vehicles-page-title">
     <div class="container">
       <span class="eyebrow">Vehicles</span>
 
@@ -74,127 +74,174 @@
         Find your next vehicle, view full details, check photos and contact our
         team to arrange an inspection or test drive.
       </p>
+
+      <div class="vehicle-page-tabs">
+        <a href="#availableVehicles" class="vehicle-page-tab active-tab">
+          Available Stock
+        </a>
+
+        <a href="#recentlySoldVehicles" class="vehicle-page-tab sold-tab">
+          Recently Sold
+        </a>
+      </div>
     </div>
   </section>
 
-  <main class="container section">
-    <div class="mobile-filter-heading">
-      <button
-        id="mobileFilterToggle"
-        class="mobile-filter-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="vehicleFiltersPanel"
-      >
-        <span class="filter-toggle-left">
-          <span class="filter-toggle-icon">☰</span>
-          <span>Filters & Sort</span>
-        </span>
+  <main>
+    <section id="availableVehicles" class="container section available-vehicles-section">
+      <div class="section-head vehicle-section-head">
+        <div>
+          <span class="eyebrow">Current Stock</span>
+          <h2>Available vehicles</h2>
+        </div>
 
-        <span class="filter-toggle-arrow">⌄</span>
-      </button>
-    </div>
-
-    <div id="vehicleFiltersPanel" class="vehicle-filters-panel">
-      <div class="filters">
-        <input
-          id="searchInput"
-          type="text"
-          placeholder="Search make, model, year, fuel or transmission..."
-          aria-label="Search vehicles"
-        />
-
-        <select id="priceFilter" aria-label="Filter by price">
-          <option value="all">All prices</option>
-          <option value="15000">Under $15,000</option>
-          <option value="25000">Under $25,000</option>
-          <option value="50000">Under $50,000</option>
-        </select>
-
-        <select id="bodyFilter" aria-label="Filter by body type">
-          <option value="all">All body types</option>
-        </select>
-
-        <select id="transmissionFilter" aria-label="Filter by transmission">
-          <option value="all">All transmissions</option>
-        </select>
-
-        <select id="fuelFilter" aria-label="Filter by fuel type">
-          <option value="all">All fuel types</option>
-        </select>
-
-        <select id="sortFilter" aria-label="Sort vehicles">
-          <option value="featured">Sort: Featured</option>
-          <option value="price-low">Price: Low to High</option>
-          <option value="price-high">Price: High to Low</option>
-          <option value="year-new">Year: Newest First</option>
-          <option value="year-old">Year: Oldest First</option>
-          <option value="km-low">Kilometres: Low to High</option>
-        </select>
+        <p class="stock-note">
+          Use the filters below to browse vehicles currently available for sale.
+        </p>
       </div>
 
-      <button
-        id="resetFilters"
-        class="filter-reset filter-reset-panel"
-        type="button"
-      >
-        Reset Filters
-      </button>
-    </div>
+      <div class="mobile-filter-heading">
+        <button
+          id="mobileFilterToggle"
+          class="mobile-filter-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="vehicleFiltersPanel"
+        >
+          <span class="filter-toggle-left">
+            <span class="filter-toggle-icon">☰</span>
+            <span>Filters & Sort</span>
+          </span>
 
-   <div class="vehicle-results-bar">
-  <span id="vehicleCount">Showing vehicles</span>
-</div>
-
-<div id="compareBar" class="compare-bar" hidden>
-  <div>
-    <strong id="compareCount">0 vehicles selected</strong>
-    <span>Select up to 3 vehicles to compare price, kilometres and key details.</span>
-  </div>
-
-  <div class="compare-actions">
-    <button id="clearCompare" class="btn secondary" type="button">
-      Clear
-    </button>
-
-    <button id="openCompare" class="btn gold" type="button">
-      Compare Vehicles
-    </button>
-  </div>
-</div>
-
-<div id="vehicleList" class="vehicle-grid"></div>
-
-<div id="compareModal" class="compare-modal" hidden>
-  <div class="compare-modal-backdrop" data-close-compare></div>
-
-  <div class="compare-modal-card">
-    <div class="compare-modal-head">
-      <div>
-        <span class="eyebrow">Vehicle Comparison</span>
-        <h2>Compare selected vehicles</h2>
+          <span class="filter-toggle-arrow">⌄</span>
+        </button>
       </div>
 
-      <button
-        class="compare-close"
-        type="button"
-        data-close-compare
-        aria-label="Close compare modal"
-      >
-        ×
-      </button>
-    </div>
+      <div id="vehicleFiltersPanel" class="vehicle-filters-panel">
+        <div class="filters">
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="Search make, model, year, fuel or transmission..."
+            aria-label="Search vehicles"
+          />
 
-    <div id="compareTableWrap" class="compare-table-wrap"></div>
-  </div>
-</div>
+          <select id="priceFilter" aria-label="Filter by price">
+            <option value="all">All prices</option>
+            <option value="15000">Under $15,000</option>
+            <option value="25000">Under $25,000</option>
+            <option value="50000">Under $50,000</option>
+          </select>
 
-    <nav
-      id="vehiclePagination"
-      class="pagination"
-      aria-label="Vehicle list pages"
-    ></nav>
+          <select id="bodyFilter" aria-label="Filter by body type">
+            <option value="all">All body types</option>
+          </select>
+
+          <select id="transmissionFilter" aria-label="Filter by transmission">
+            <option value="all">All transmissions</option>
+          </select>
+
+          <select id="fuelFilter" aria-label="Filter by fuel type">
+            <option value="all">All fuel types</option>
+          </select>
+
+          <select id="sortFilter" aria-label="Sort vehicles">
+            <option value="featured">Sort: Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="year-new">Year: Newest First</option>
+            <option value="year-old">Year: Oldest First</option>
+            <option value="km-low">Kilometres: Low to High</option>
+          </select>
+        </div>
+
+        <button
+          id="resetFilters"
+          class="filter-reset filter-reset-panel"
+          type="button"
+        >
+          Reset Filters
+        </button>
+      </div>
+
+      <div class="vehicle-results-bar">
+        <span id="vehicleCount">Showing vehicles</span>
+      </div>
+
+      <div id="compareBar" class="compare-bar" hidden>
+        <div>
+          <strong id="compareCount">0 vehicles selected</strong>
+          <span>Select up to 3 vehicles to compare price, kilometres and key details.</span>
+        </div>
+
+        <div class="compare-actions">
+          <button id="clearCompare" class="btn secondary" type="button">
+            Clear
+          </button>
+
+          <button id="openCompare" class="btn gold" type="button">
+            Compare Vehicles
+          </button>
+        </div>
+      </div>
+
+      <div id="vehicleList" class="vehicle-grid"></div>
+
+      <nav
+        id="vehiclePagination"
+        class="pagination"
+        aria-label="Vehicle list pages"
+      ></nav>
+    </section>
+
+    <section id="recentlySoldVehicles" class="sold-vehicles-showcase">
+      <div class="container">
+        <div class="sold-section-intro">
+          <span class="eyebrow sold-section-eyebrow">Recently Sold</span>
+
+          <h2>Vehicles we have sold</h2>
+
+          <p>
+            A showcase of vehicles recently sold by KHG Auto Carsales. These
+            vehicles are no longer available for enquiry, but show the type of
+            quality stock we regularly handle.
+          </p>
+        </div>
+
+        <div id="soldVehiclesList" class="sold-vehicle-grid"></div>
+
+<nav
+  id="soldVehiclePagination"
+  class="pagination sold-pagination"
+  aria-label="Sold vehicle list pages"
+></nav>
+      </div>
+    </section>
   </main>
+
+  <div id="compareModal" class="compare-modal" hidden>
+    <div class="compare-modal-backdrop" data-close-compare></div>
+
+    <div class="compare-modal-card">
+      <div class="compare-modal-head">
+        <div>
+          <span class="eyebrow">Vehicle Comparison</span>
+          <h2>Compare selected vehicles</h2>
+        </div>
+
+        <button
+          class="compare-close"
+          type="button"
+          data-close-compare
+          aria-label="Close compare modal"
+        >
+          ×
+        </button>
+      </div>
+
+      <div id="compareTableWrap" class="compare-table-wrap"></div>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="container footer-grid">

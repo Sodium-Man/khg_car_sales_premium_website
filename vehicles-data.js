@@ -731,6 +731,22 @@ oldPrice: 17000,
 },
 ];
 
+const soldVehicles = [
+  {
+    id: "sold-2009-volvo-c30-s",
+    title: "2009 Volvo C30 M Series MY10 S Hatchback",
+    price: 6999,
+    kms: "192,000 km",
+    transmission: "Automatic",
+    fuel: "Petrol",
+    body: "Hatchback",
+    colour: "Ice White",
+    stockNo: "KHGVOLVOC30",
+    image: "assets/vehicles/Volvo C30 2009/car_01.png",
+    soldText: "Sold"
+  }
+];
+
 const services = [
   { title: "Paintless Dent Removal", text: "Remove minor dents while keeping the original paint finish where suitable." },
   { title: "Spray Painting", text: "Quality automotive paint refinishing for repaired panels and cosmetic restoration." },

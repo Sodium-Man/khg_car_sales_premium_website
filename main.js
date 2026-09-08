@@ -1061,6 +1061,161 @@ function setupPromoPopup() {
   });
 }
 
+function soldVehicleCard(v) {
+  return `
+    <article class="sold-vehicle-card">
+      <div class="sold-vehicle-image">
+        <img src="${v.image}" alt="${v.title}">
+      </div>
+
+      <div class="sold-vehicle-info">
+        <span class="sold-status">${v.soldText || "Sold"}</span>
+
+        <h3>${v.title}</h3>
+
+        <div class="sold-price">${formatPrice(v.price)}</div>
+
+        <div class="sold-meta">
+          <span>${v.kms}</span>
+          <span>${v.transmission}</span>
+          <span>${v.fuel}</span>
+          <span>${v.body}</span>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function setupSoldVehicles() {
+  const soldList = document.getElementById("soldVehiclesList");
+  const soldPagination = document.getElementById("soldVehiclePagination");
+
+  if (!soldList || typeof soldVehicles === "undefined") return;
+
+  const soldPerPage = 6;
+  let currentSoldPage = 1;
+
+  function renderSoldPagination(totalPages) {
+    if (!soldPagination) return;
+
+    if (totalPages <= 1) {
+      soldPagination.innerHTML = "";
+      return;
+    }
+
+    const buttons = [];
+
+    buttons.push(`
+      <button
+        type="button"
+        ${currentSoldPage === 1 ? "disabled" : ""}
+        data-sold-page="${currentSoldPage - 1}"
+      >
+        Previous
+      </button>
+    `);
+
+    for (let page = 1; page <= totalPages; page++) {
+      buttons.push(`
+        <button
+          type="button"
+          class="${page === currentSoldPage ? "active" : ""}"
+          aria-current="${page === currentSoldPage ? "page" : "false"}"
+          data-sold-page="${page}"
+        >
+          ${page}
+        </button>
+      `);
+    }
+
+    buttons.push(`
+      <button
+        type="button"
+        ${currentSoldPage === totalPages ? "disabled" : ""}
+        data-sold-page="${currentSoldPage + 1}"
+      >
+        Next
+      </button>
+    `);
+
+    soldPagination.innerHTML = buttons.join("");
+
+    soldPagination.querySelectorAll("button[data-sold-page]").forEach(button => {
+      button.addEventListener("click", () => {
+        currentSoldPage = Number(button.dataset.soldPage);
+        renderSoldVehicles();
+
+        soldList.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
+  }
+
+  function renderSoldVehicles() {
+    const totalPages = Math.max(1, Math.ceil(soldVehicles.length / soldPerPage));
+
+    if (currentSoldPage > totalPages) {
+      currentSoldPage = totalPages;
+    }
+
+    const start = (currentSoldPage - 1) * soldPerPage;
+    const shown = soldVehicles.slice(start, start + soldPerPage);
+
+    soldList.innerHTML =
+      shown.map(vehicle => soldVehicleCard(vehicle)).join("") ||
+      "<p>No sold vehicles added yet.</p>";
+
+    renderSoldPagination(totalPages);
+  }
+
+  renderSoldVehicles();
+}
+
+function setupVehicleTabs() {
+  const tabs = document.querySelectorAll("[data-vehicle-tab]");
+  const availablePanel = document.getElementById("availableVehiclesPanel");
+  const soldPanel = document.getElementById("soldVehiclesPanel");
+
+  if (!tabs.length || !availablePanel || !soldPanel) return;
+
+  function activateTab(target) {
+    tabs.forEach(tab => {
+      tab.classList.toggle("active", tab.dataset.vehicleTab === target);
+    });
+
+    if (target === "sold") {
+      availablePanel.hidden = true;
+      availablePanel.classList.remove("active");
+
+      soldPanel.hidden = false;
+      soldPanel.classList.add("active");
+
+      const compareBar = document.getElementById("compareBar");
+      if (compareBar) compareBar.hidden = true;
+    } else {
+      soldPanel.hidden = true;
+      soldPanel.classList.remove("active");
+
+      availablePanel.hidden = false;
+      availablePanel.classList.add("active");
+
+      if (typeof updateCompareBar === "function") {
+        updateCompareBar();
+      }
+    }
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      activateTab(tab.dataset.vehicleTab);
+    });
+  });
+
+  activateTab("available");
+}
+
 /* =========================================================
    INITIALISE SITE
    ========================================================= */
@@ -1074,3 +1229,5 @@ setupCarousels();
 setupVehicleDetail();
 setupAjaxForms();
 setupPromoPopup();
+setupSoldVehicles();
+setupVehicleTabs();
