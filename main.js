@@ -9,6 +9,53 @@ function formatPrice(price) {
   return "$" + Number(price).toLocaleString() + " Drive Away";
 }
 
+function formatMoney(price) {
+  return "$" + Number(price).toLocaleString();
+}
+
+function hasPromoPrice(v) {
+  return Number(v.oldPrice) > Number(v.price);
+}
+
+function getSavingAmount(v) {
+  if (!hasPromoPrice(v)) return 0;
+  return Number(v.oldPrice) - Number(v.price);
+}
+
+function priceMarkup(v, extraClass = "") {
+  if (!hasPromoPrice(v)) {
+    return `
+      <div class="price ${extraClass}">
+        ${formatPrice(v.price)}
+      </div>
+    `;
+  }
+
+  return `
+    <div class="promo-price-box ${extraClass}">
+      <div class="promo-price-top">
+        <span class="promo-badge">September Deal</span>
+        <span class="promo-save">Save ${formatMoney(getSavingAmount(v))}</span>
+      </div>
+
+      <div class="promo-price-row">
+        <span class="old-price">${formatMoney(v.oldPrice)}</span>
+        <span class="new-price">${formatMoney(v.price)}</span>
+      </div>
+
+      <div class="drive-away-text">Drive Away</div>
+    </div>
+  `;
+}
+
+function comparePriceText(v) {
+  if (!hasPromoPrice(v)) {
+    return formatPrice(v.price);
+  }
+
+  return `Was ${formatMoney(v.oldPrice)} / Now ${formatPrice(v.price)} / Save ${formatMoney(getSavingAmount(v))}`;
+}
+
 function getVehicleImages(v) {
   if (Array.isArray(v.images) && v.images.length) {
     return v.images.filter(Boolean);
@@ -40,25 +87,26 @@ function vehicleGallery(v) {
 
   if (!images.length) return vehicleImage(v);
 
-  const sliderControls = images.length > 1
-    ? `
-      <button
-        class="gallery-nav gallery-prev"
-        type="button"
-        aria-label="Previous vehicle image"
-      >
-        ‹
-      </button>
+  const sliderControls =
+    images.length > 1
+      ? `
+        <button
+          class="gallery-nav gallery-prev"
+          type="button"
+          aria-label="Previous vehicle image"
+        >
+          ‹
+        </button>
 
-      <button
-        class="gallery-nav gallery-next"
-        type="button"
-        aria-label="Next vehicle image"
-      >
-        ›
-      </button>
-    `
-    : "";
+        <button
+          class="gallery-nav gallery-next"
+          type="button"
+          aria-label="Next vehicle image"
+        >
+          ›
+        </button>
+      `
+      : "";
 
   const thumbnails = images
     .map(
@@ -134,7 +182,7 @@ function vehicleCard(v, options = {}) {
           </a>
         </h3>
 
-        <div class="price">${formatPrice(v.price)}</div>
+        ${priceMarkup(v)}
 
         <div class="meta">
           <span>${v.kms}</span>
@@ -355,7 +403,7 @@ function openCompareModal() {
   }
 
   const rows = [
-    ["Price", vehicle => formatPrice(vehicle.price)],
+    ["Price", vehicle => comparePriceText(vehicle)],
     ["Kilometres", vehicle => vehicle.kms],
     ["Fuel", vehicle => vehicle.fuel],
     ["Transmission", vehicle => vehicle.transmission],
@@ -756,7 +804,7 @@ function setupVehicleDetail() {
   const subject = encodeURIComponent(`Vehicle enquiry: ${v.title}`);
 
   const body = encodeURIComponent(
-    `Hi KHG Auto Workshops,\n\nI am interested in ${v.title}.\nStock No: ${v.stockNo}\nPrice: ${formatPrice(v.price)}\nKilometres: ${v.kms}\n\nPlease contact me.\n\nName:\nPhone:`
+    `Hi KHG Auto Workshops,\n\nI am interested in ${v.title}.\nStock No: ${v.stockNo}\nPrice: ${comparePriceText(v)}\nKilometres: ${v.kms}\n\nPlease contact me.\n\nName:\nPhone:`
   );
 
   const carsalesUrl = getCarsalesUrl(v);
@@ -813,7 +861,7 @@ function setupVehicleDetail() {
 
         <input type="hidden" name="Vehicle Title" value="${v.title}" />
         <input type="hidden" name="Stock Number" value="${v.stockNo}" />
-        <input type="hidden" name="Vehicle Price" value="${formatPrice(v.price)}" />
+        <input type="hidden" name="Vehicle Price" value="${comparePriceText(v)}" />
         <input type="hidden" name="Page URL" value="${pageUrl}" />
 
         <div class="form-grid">
@@ -858,7 +906,7 @@ function setupVehicleDetail() {
         <div class="auto-vehicle-summary">
           <strong>${v.title}</strong>
           <span>Stock No: ${v.stockNo}</span>
-          <span>${formatPrice(v.price)}</span>
+          <span>${comparePriceText(v)}</span>
         </div>
 
         <button class="vehicle-enquiry-submit" type="submit">
@@ -890,9 +938,7 @@ function setupVehicleDetail() {
 
           <h1>${v.title}</h1>
 
-          <div class="price detail-price">
-            ${formatPrice(v.price)}
-          </div>
+          ${priceMarkup(v, "detail-price")}
 
           <div class="spec-list">
             <div><strong>Kilometres</strong><span>${v.kms}</span></div>
@@ -973,9 +1019,11 @@ function setupVehicleDetail() {
   root
     .querySelector(".gallery-next")
     ?.addEventListener("click", () => showGalleryImage(activeGalleryIndex + 1));
-
-  setupAjaxForms();
 }
+
+/* =========================================================
+   SEPTEMBER PROMOTION POPUP
+   ========================================================= */
 
 function setupPromoPopup() {
   const popup = document.getElementById("promoPopup");
@@ -1013,6 +1061,9 @@ function setupPromoPopup() {
   });
 }
 
+/* =========================================================
+   INITIALISE SITE
+   ========================================================= */
 
 setupMobileMenu();
 setupActiveNav();

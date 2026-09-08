@@ -3619,3 +3619,144 @@ body.promo-popup-open {
   object-position: top center;
 }
 }
+
+/* =========================================================
+   PROMOTIONAL DISCOUNT PRICE DESIGN
+   ========================================================= */
+
+.promo-price-box {
+  margin: 14px 0 16px;
+  padding: 15px;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at top left, rgba(239, 68, 68, 0.14), transparent 36%),
+    linear-gradient(135deg, #fff7f7, #ffffff 45%, #eef8ff);
+  border: 1px solid rgba(239, 68, 68, 0.16);
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+}
+
+.promo-price-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.promo-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 18px rgba(239, 68, 68, 0.22);
+}
+
+.promo-save {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: rgba(22, 163, 74, 0.12);
+  color: #15803d;
+  font-size: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.promo-price-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.old-price {
+  position: relative;
+  display: inline-block;
+  color: #9ca3af;
+  font-size: 20px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.old-price::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  right: -4px;
+  top: 48%;
+  height: 3px;
+  border-radius: 999px;
+  background: #ef4444;
+  transform: rotate(-8deg);
+}
+
+.new-price {
+  color: var(--blue-dark);
+  font-size: 31px;
+  font-weight: 950;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.drive-away-text {
+  margin-top: 7px;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Vehicle detail page larger promo price */
+.detail-price.promo-price-box {
+  padding: 18px;
+  margin: 18px 0 20px;
+}
+
+.detail-price .old-price {
+  font-size: 23px;
+}
+
+.detail-price .new-price {
+  font-size: clamp(34px, 4vw, 46px);
+}
+
+/* Compare table promo price text */
+.compare-table td {
+  line-height: 1.5;
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .promo-price-box {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .promo-price-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .old-price {
+    font-size: 18px;
+  }
+
+  .new-price {
+    font-size: 29px;
+  }
+
+  .detail-price .new-price {
+    font-size: 36px;
+  }
+}
