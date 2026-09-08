@@ -27,7 +27,6 @@
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      
       "@type": "AutoDealer",
       "name": "KHG Auto Carsales",
       "url": "https://www.khgautocarsales.com.au/",
@@ -47,6 +46,77 @@
 </head>
 
 <body>
+  <div
+    id="promoPopup"
+    class="promo-popup"
+    aria-hidden="true"
+  >
+    <div class="promo-popup-backdrop" data-promo-close></div>
+
+    <div class="promo-popup-card" role="dialog" aria-modal="true" aria-label="September promotion">
+      <button
+        class="promo-popup-close"
+        type="button"
+        aria-label="Close promotion popup"
+        data-promo-close
+      >
+        ×
+      </button>
+
+      <div class="promo-popup-grid">
+        <div class="promo-popup-copy">
+          <span class="eyebrow promo-popup-eyebrow">September Offers</span>
+
+          <h2>Massive September promotions are now live.</h2>
+
+          <p>
+            Take advantage of bigger offers this September at KHG Auto Carsales.
+            Enquire about available vehicles, finance options, trade-ins and
+            selected warranty support.
+          </p>
+
+          <div class="promo-popup-points">
+            <div>
+              <strong>2 Free</strong>
+              <span>scheduled services with any purchase</span>
+            </div>
+
+            <div>
+              <strong>$100</strong>
+              <span>fuel voucher with any purchase</span>
+            </div>
+
+            <div>
+              <strong>30% Off</strong>
+              <span>selected extended warranty options</span>
+            </div>
+          </div>
+
+          <div class="hero-actions promo-popup-actions">
+            <a class="btn gold" href="vehicles.html">View Current Stock</a>
+            <a class="btn secondary" href="contact.html">Ask About Offers</a>
+          </div>
+
+          <p class="promo-popup-note">
+            September promotion only. Offer details may vary by vehicle and are
+            subject to availability.
+          </p>
+        </div>
+
+        <a
+          class="promo-popup-image"
+          href="vehicles.html"
+          aria-label="View current stock for September promotions"
+        >
+          <img
+            src="assets/september-promotion.jpg"
+            alt="KHG Car Sales massive September promotions event"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+
   <div class="top-strip">
     <div class="container">
       <span>Quality used vehicles and car sales enquiries in Clayton South</span>

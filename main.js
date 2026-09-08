@@ -977,9 +977,42 @@ function setupVehicleDetail() {
   setupAjaxForms();
 }
 
-/* =========================================================
-   INITIALISE
-   ========================================================= */
+function setupPromoPopup() {
+  const popup = document.getElementById("promoPopup");
+
+  if (!popup) return;
+
+  const closeButtons = popup.querySelectorAll("[data-promo-close]");
+  const isHomePage =
+    location.pathname === "/" ||
+    location.pathname.endsWith("index.html") ||
+    location.pathname === "";
+
+  if (!isHomePage) return;
+
+  setTimeout(() => {
+    popup.classList.add("show");
+    popup.setAttribute("aria-hidden", "false");
+    document.body.classList.add("promo-popup-open");
+  }, 700);
+
+  function closePromoPopup() {
+    popup.classList.remove("show");
+    popup.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("promo-popup-open");
+  }
+
+  closeButtons.forEach(button => {
+    button.addEventListener("click", closePromoPopup);
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      closePromoPopup();
+    }
+  });
+}
+
 
 setupMobileMenu();
 setupActiveNav();
@@ -989,3 +1022,4 @@ setupCompareFeature();
 setupCarousels();
 setupVehicleDetail();
 setupAjaxForms();
+setupPromoPopup();
